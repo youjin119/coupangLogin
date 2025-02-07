@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    
+    .input-container {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      width: 100%;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+    .warningText{
+      margin-bottom: 15px;
+      padding-left: 15px;
+      font-size: 12px;
+      color: red;
+      display: none;
+    }
+    
+    .icon {
+      padding: 14px;
+      background: #FAFAFA;
+      color: #ccc;
+      min-width: 50px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-right: none;
+    }
+    .icon-check{
+
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+      border: 1px solid #ccc;
+      /* background-image: url(img/checkIcon.png); */
+      background-repeat: no-repeat;
+      background-size: 20px;
+      background-position: 97% 50%;
+    }
+    
+    /* .input-field:focus {
+     
+    } */
+    
+    /* Set a style for the submit button */
+    .btn {
+      background-color: #1E90FF;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 15px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 1;
+    }
+    .footer div{
+      font-size: 12px;
+      font-weight: 100;
+      text-align: center;
+    }
+    .bold{
+      font-weight: bold !important;
+      font-size: 15px !important;
+    }
+    p{
+      padding-bottom: 10px;
+    }
+    .marginFooter1{
+      padding-top: 30px;
+    }
+    .marginFooter2{
+      padding-top: 5px;
+    }
+    .logo{
+      padding: 35px 0px;
+      width: 200px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .lineStyle{
+      opacity: 10%;
+      margin: 20px 0px;
+    }
+    .checkboxs{
+      width: 20px;
+      height: 20px;
+      float: left;
+      margin-right: 10px;
+    }
+    .checkText1{
+      float: none;
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .checkText2{
+      padding-left: 32px;
+      font-size: 12px;
+      font-weight: 100;
+      word-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+  </style>
+    
+  <title>회원가입</title>
+
+</head>
+<body>
+  <form action="#" style="max-width:500px;margin:auto" name="coupang" id="coupang">
+    <img class="logo" src="img/logo-coupang.png"></img>
+    <p class="bold">회원정보를 입력해주세요</p>
+    
+    <div class="input-container" id="idField">
+      <img class="icon" src="img/mailIcon.png"></img>
+      <input class="input-field" type="text" placeholder="아이디(이메일)" name="id" id="id">
+      <!-- <img class="icon-check" src="img/checkIcon.png"> -->
+    </div>
+    <div class="warningText">이메일을 올바르게 입력해주세요.</div>
+    <script>
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const inputId = document.getElementById("id");
+      const idField = document.getElementById("idField");
+      const warningText = document.getElementsByClassName("warningText");
+      let inputCheckCount = 0;
+      inputId.addEventListener("focus",function(){
+        idField.style.borderBottom = "2px solid #1E90FF";
+        inputId.style.backgroundImage = "none";
+        if(!emailRegex.test(document.coupang.id.value)&&inputCheckCount==1){
+          idField.style.borderBottom = "2px solid red";
+        }
+        
+      });
+      inputId.addEventListener("blur",function(){
+        if(!emailRegex.test(document.coupang.id.value)){
+          warningText[0].style.display = "block";
+          idField.style.borderBottom = "2px solid red";
+        }
+        else{
+          warningText[0].style.display = "none";
+          idField.style.borderBottom = "none";
+          inputId.style.backgroundImage = "url(img/checkIcon.png)";
+        }
+        inputCheckCount=1;
+      });
+    </script>
+  
+    <div class="input-container">
+      <img class="icon" src="img/pwIcon.png"></img>
+      <input class="input-field" type="password" placeholder="비밀번호" name="pw" id="pw">
+    </div>
+    <div class="warningText">
+      <div class="pwMisson1"><span>&times;</span>영문/숫자/특수문자 2가지 이상 조합 (8~20자)</div>
+      <div class="pwMisson2"><span>&check;</span>3개 이상 연속되거나 동일한 문자/숫자 제외</div>
+      <div class="pwMisson3"><span>&check;</span>아이디(이메일) 제외</div>
+    </div>
+    
+    <div class="input-container">
+      <img class="icon" src="img/pw2Icon.png"></img>
+      <input class="input-field" type="password" placeholder="비밀번호 확인" name="pwCheck" id="pwCheck">
+    </div>
+    <div class="warningText"><span>&times;</span>확인을 위해 새 비밀번호를 다시 입력해주세요.</div>
+
+    <div class="input-container">
+      <img class="icon" src="img/nameIcon.png"></img>
+      <input class="input-field" type="text" placeholder="이름" name="myName" id="myName">
+    </div>
+    <div class="warningText">이름을 정확히 입력하세요.</div>
+
+    <div class="input-container">
+      <img class="icon" src="img/phoneIcon.png"></img>
+      <input class="input-field" type="text" placeholder="휴대폰 번호" name="phone" id="phone">
+    </div>
+    <div class="warningText">휴대폰 번호를 정확하게 입력하세요.</div>
+
+    <hr class="lineStyle">
+    <div>
+      <input class="checkboxs" type="checkbox" name="allCheck" value="1">
+      <div class="checkText1">모두 확인하였으며 동의합니다.</div>
+      <div class="checkText2">전체 동의에는 필수 및 선택 정보에 대한 동의가 포함되어 있으며, 개별적으로 동의를 선택 하실 수 있습니다. 선택 항목에 대한 동의를 거부하시는 경우에도 서비스 이용이 가능합니다.</div>
+    </div>
+
+    <div>
+      <!-- 약관동의창 -->
+    </div>
+
+    <button type="submit" class="btn">동의하고 가입하기</button>
+    <div class="footer">
+      <div class="marginFooter1">법인 고객이신가요?</div>
+      <div>사업자 회원으로 전용 특가 혜택을 누려보세요.</div>
+      <div class="bold marginFooter2">쿠팡비즈 간편가입 &gt;</div>
+    </div>
+  </form>
+</body>
+</html>
